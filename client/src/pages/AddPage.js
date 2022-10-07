@@ -27,7 +27,7 @@ function AddPage() {
       .catch((error) => {
         console.log(error);
       });
-  }, [Cars]);
+  }, []);
   return (
     <div className=" ">
       <div className="grid grid-cols-12">
