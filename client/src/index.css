@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .nav-item {
-  @apply hover:bg-gray-700 rounded-md px-4 py-1 my-1 mx-3 p-2 cursor-pointer;
+  @apply hover:bg-gray-700 rounded-md px-4 py-1 my-1 mx-3 p-2 cursor-pointer hover:text-red-500;
 }

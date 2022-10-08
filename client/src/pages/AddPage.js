@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 function AddPage() {
   const [Cars, setCars] = useState([]);
+  const [del, setDel] = useState(false);
 
   const deleteHandle = (e) => {
     console.log(e.target.id);
@@ -15,6 +16,8 @@ function AddPage() {
       .catch((error) => {
         console.log(error);
       });
+
+    setDel(!del);
   };
 
   useEffect(() => {
@@ -27,7 +30,7 @@ function AddPage() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [del]);
   return (
     <div className=" ">
       <div className="grid grid-cols-12">
@@ -44,30 +47,29 @@ function AddPage() {
           </p>
         ) : (
           Cars.map((cars) => (
-            <div className="grid grid-col-4 gap-2 col-span-4 p-1">
+            <div className="grid grid-col-4 gap-2  w-10/12 col-span-4 p-1">
               <img
-                src="https://picsum.photos/id/237/200/200"
-                className="col-span-4 object-cover h-56 w-full mb -2 rounded-md"
+                src={cars.imagem}
+                className="col-span-4 object-cover h-36 w-full justify-self-center rounded-md"
                 alt=""
               />
 
-              <span className="col-span-4 text-xl font-semibold text-center">
-                {cars.nome}
+              <span className="col-span-4 text-md font-semibold text-center">
+                {`${cars.nome} ${cars.modelo}`}
               </span>
-              <div className="p-2 text-xl">Modelo</div>
-              <div className="p-2 font-semibold text-xl">{cars.modelo}</div>
-              <button className="bg-green-500 text-white text-center rounded py-1 px-2">
+              <div className="col-span-4 font-bold text-xl text-center">
+                {cars.preco} R$
+              </div>
+              <button className="hover:bg-green-600 bg-green-500 text-white text-center col-start-3 rounded py-0.5 px-1">
                 Editar
               </button>
               <button
                 id={cars._id}
                 onClick={(e) => deleteHandle(e)}
-                className="bg-red-500 text-white text-center rounded py-1 px-2"
+                className="bg-red-500 text-white text-center hover:bg-red-600 rounded py-0.5 px-1"
               >
                 Exluir
               </button>
-              <div className="p-2 text-xl">Preço</div>
-              <div className="p-2 font-semibold text-xl">{cars.preco}</div>
             </div>
           ))
         )}
