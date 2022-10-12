@@ -7,9 +7,13 @@ function AddPage() {
   const [del, setDel] = useState(false);
 
   const deleteHandle = (e) => {
-    console.log(e.target.id);
+    const id = e.target.id;
+    const img = e.target.attributes
+      .getNamedItem("data-img")
+      .value.split("=")[2];
+    console.log(img);
     axiosCost
-      .get(`delete/${e.target.id}`)
+      .post(`delete/${e.target.id}`, { id: img })
       .then((res) => {
         console.log(res);
       })
@@ -50,7 +54,7 @@ function AddPage() {
             <div className="grid grid-col-4 gap-2  w-10/12 col-span-4 p-1">
               <img
                 src={cars.imagem}
-                className="col-span-4 object-cover h-36 w-full justify-self-center rounded-md"
+                className="col-span-4 object-cover h-48 w-full justify-self-center rounded-md"
                 alt=""
               />
 
@@ -65,6 +69,7 @@ function AddPage() {
               </button>
               <button
                 id={cars._id}
+                data-img={cars.imagem}
                 onClick={(e) => deleteHandle(e)}
                 className="bg-red-500 text-white text-center hover:bg-red-600 rounded py-0.5 px-1"
               >
